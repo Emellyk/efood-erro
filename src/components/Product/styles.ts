@@ -5,6 +5,16 @@ import { BtnLinkSecundario } from '../Button/styles'
 export const Card = styled.div`
   background-color: ${cores.branca};
   position: relative;
+
+  div {
+    width: 100%;
+
+    img {
+      max-width: 100%;
+      height: 100%;
+    }
+  }
+}
 `
 
 export const CardBorder = styled.div`

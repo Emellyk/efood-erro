@@ -13,4 +13,5 @@ export const List = styled.ul`
   row-gap: 64px;
   margin-bottom: 64px;
   padding-top: 80px;
+  object-fit: cover;
 `

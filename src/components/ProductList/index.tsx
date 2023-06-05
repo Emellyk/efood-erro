@@ -16,6 +16,8 @@ const ProductList = ({ restaurante }: Props) => (
           capa={restaurante.capa}
           title={restaurante.title}
           rating={restaurante.rating}
+          highlighted={false}
+          type={restaurante.type}
         />
       ))}
     </List>

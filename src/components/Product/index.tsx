@@ -13,30 +13,34 @@ import star from '../../assets/images/star_icon.png'
 import Tag from '../Tag'
 import { BtnLinkSecundario } from '../Button/styles'
 import Button from '../Button'
-import { Restaurante } from '../../pages/Home'
 
 type Props = {
-  restaurante: Restaurante[]
+  title: string
+  highlighted: boolean
+  type: string
+  rating: number
+  description: string
+  capa: string
 }
 
-const Product = ({ restaurante }: Props) => (
+const Product = ({ title, type, rating, description, capa }: Props) => (
   <Card>
-    <img src={restaurante.capa} alt={restaurante.title} />
+    <div>
+      <img src={capa} alt={title} />
+    </div>
     <Infos>
       <Tag>Destaque do dia</Tag>
-      {restaurante.map((restaurante) => (
-        <Tag key={restaurante.type}>{restaurante.type}</Tag>
-      ))}
+      <Tag>{type}</Tag>
     </Infos>
     <CardBorder>
       <ContainerTitulo>
-        <Titulo>{restaurante.title}</Titulo>
+        <Titulo>{title}</Titulo>
         <Titulo>
-          {restaurante.rating}
+          {rating}
           <img src={star} alt="estrela" />
         </Titulo>
       </ContainerTitulo>
-      <Descricao>{restaurante.description}</Descricao>
+      <Descricao>{description}</Descricao>
       <Button type="link" to="/perfil" title="Conheça nossos pratos">
         Saiba mais
       </Button>
@@ -46,11 +50,11 @@ const Product = ({ restaurante }: Props) => (
 
 export default Product
 
-export const ProductPerfil = ({ restaurante }: Props) => (
+export const ProductPerfil = ({ capa, title, description }: Props) => (
   <CardPerfil>
-    <img src={restaurante.capa} alt={restaurante.title} />
-    <TituloPerfil>{restaurante.title}</TituloPerfil>
-    <DescricaoPerfil>{restaurante.description}</DescricaoPerfil>
+    <img src={capa} alt={title} />
+    <TituloPerfil>{title}</TituloPerfil>
+    <DescricaoPerfil>{description}</DescricaoPerfil>
     <BtnLinkSecundario type="link" to="/" title="Adicione ao carrinho">
       Adicionar ao carrinho
     </BtnLinkSecundario>

@@ -1,72 +1,31 @@
-import Restaurante from '../../models/Restaurantes'
+import { useEffect, useState } from 'react'
 
-import pizza from '../../assets/images/pizzza.png'
 import ProductListPerfil from '../../components/ProductListPerfil'
 import Banner from '../../components/Banner'
-import { useState } from 'react'
 
-const restaurantes: Restaurante[] = [
-  {
-    id: 1,
-    category: [''],
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    title: 'Pizza Marguerita',
-    image: pizza,
-    note: ''
-  },
-  {
-    id: 2,
-    category: [''],
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    title: 'Pizza Marguerita',
-    image: pizza,
-    note: ''
-  },
-  {
-    id: 3,
-    category: [''],
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    title: 'Pizza Marguerita',
-    image: pizza,
-    note: ''
-  },
-  {
-    id: 4,
-    category: [''],
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    title: 'Pizza Marguerita',
-    image: pizza,
-    note: ''
-  },
-  {
-    id: 5,
-    category: [''],
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    title: 'Pizza Marguerita',
-    image: pizza,
-    note: ''
-  },
-  {
-    id: 6,
-    category: [''],
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    title: 'Pizza Marguerita',
-    image: pizza,
-    note: ''
-  }
-]
+import { Restaurante } from '../../pages/Home'
+
+export type Props = {
+  restaurante: Restaurante
+}
 
 const Perfil = () => {
-  const [restaurantes, setRestaurante] = useState([])(
+  const [restaurante, setRestaurante] = useState<Restaurante[]>([])
+
+  useEffect(() => {
+    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
+      .then((res) => res.json())
+      .then((res) => setRestaurante(res))
+  }, [])
+
+  if (!restaurante) {
+    return <h3>Carregando...</h3>
+  }
+
+  return (
     <>
       <Banner />
-      <ProductListPerfil restaurante={restaurantes} />
+      <ProductListPerfil restaurante={restaurante} />
     </>
   )
 }
