@@ -5,18 +5,18 @@ import ProductList from '../../components/ProductList'
 
 export type Restaurante = {
   id: number
-  title: string
-  highlighted: boolean
-  type: string
-  rating: number
-  description: string
+  titulo: string
+  destacado: boolean
+  tipo: string
+  avaliacao: number
+  descricao: string
   capa: string
   cardapio: {
-    photo: string
-    price: number
+    foto: string
+    preco: number
     id: number
-    name: string
-    description: string
+    nome: string
+    descricao: string
     porcao: string
   }
 }

@@ -1,11 +1,10 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
 
-import { Props } from '.'
 import { BtnLinkSecundario } from '../Button/styles'
 import { Container } from '../ProductList/styles'
 
-export const BgHero = styled.header<Props>`
+export const BgHero = styled.header`
   width: 100%;
   height: 186px;
   align-items: center;
@@ -44,10 +43,10 @@ export const BgOpacity = styled.div`
   background: rgba(0, 0, 0, 0.5);
 `
 
-export const Infos = styled.h2<Props>`
+export const Infos = styled.h2`
   color: ${cores.branca};
   font-size: 32px;
-  font-weight: ${(props) => (props.weight === 'big' ? '700' : '100')};
+  font-weight: 100;
   line-height: 37.5px;
   padding-top: 25px;
   padding-bottom: 124px;

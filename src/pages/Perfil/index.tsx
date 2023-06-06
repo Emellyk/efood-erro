@@ -6,26 +6,26 @@ import Banner from '../../components/Banner'
 import { Restaurante } from '../../pages/Home'
 
 export type Props = {
-  restaurante: Restaurante
+  restaurante: Restaurante[]
 }
 
 const Perfil = () => {
-  const [restaurante, setRestaurante] = useState<Restaurante[]>([])
+  const [cardapio, setCardapio] = useState<Restaurante[]>([])
 
   useEffect(() => {
     fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
       .then((res) => res.json())
-      .then((res) => setRestaurante(res))
+      .then((res) => setCardapio(res))
   }, [])
 
-  if (!restaurante) {
+  if (!cardapio) {
     return <h3>Carregando...</h3>
   }
 
   return (
     <>
-      <Banner />
-      <ProductListPerfil restaurante={restaurante} />
+      <Banner capa={''} tipo={''} title={''} />
+      <ProductListPerfil restaurante={cardapio} />
     </>
   )
 }

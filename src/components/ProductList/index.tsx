@@ -6,22 +6,46 @@ export type Props = {
   restaurante: Restaurante[]
 }
 
-const ProductList = ({ restaurante }: Props) => (
-  <Container>
-    <List>
-      {restaurante.map((restaurante) => (
-        <Product
-          key={restaurante.id}
-          description={restaurante.description}
-          capa={restaurante.capa}
-          title={restaurante.title}
-          rating={restaurante.rating}
-          highlighted={false}
-          type={restaurante.type}
-        />
-      ))}
-    </List>
-  </Container>
-)
+export const formataPreco = (preco = 0) => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(preco)
+}
 
+const ProductList = ({ restaurante }: Props) => {
+  const getRestauranteTags = (restaurante: Restaurante) => {
+    const tags = []
+
+    if (restaurante.cardapio.preco) {
+      tags.push(formataPreco(restaurante.cardapio.preco))
+    }
+
+    return tags
+  }
+
+  return (
+    <Container>
+      <List>
+        {restaurante.map((restaurante) => (
+          <li key={restaurante.id}>
+            <Product
+              descricao={restaurante.descricao}
+              capa={restaurante.capa}
+              titulo={restaurante.titulo}
+              avaliacao={restaurante.avaliacao}
+              destacado={false}
+              tipo={restaurante.tipo}
+              foto={restaurante.cardapio.foto}
+              nome={restaurante.cardapio.nome}
+              id={restaurante.id}
+              preco={restaurante.cardapio.preco}
+              porcao={restaurante.cardapio.porcao}
+            />
+          </li>
+        ))}
+      </List>
+    </Container>
+  )
+}
 export default ProductList

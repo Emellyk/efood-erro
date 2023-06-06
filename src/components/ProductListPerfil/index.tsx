@@ -12,12 +12,17 @@ const ProductListPerfil = ({ restaurante }: Props) => (
       {restaurante.map((restaurante) => (
         <ProductPerfil
           key={restaurante.id}
-          description={restaurante.cardapio.description}
+          descricao={restaurante.cardapio.descricao}
           capa={restaurante.capa}
-          title={restaurante.title}
-          type={restaurante.type}
-          rating={restaurante.rating}
-          highlighted={false}
+          titulo={restaurante.titulo}
+          tipo={restaurante.tipo}
+          avaliacao={restaurante.avaliacao}
+          destacado={false}
+          foto={restaurante.cardapio.foto}
+          nome={restaurante.cardapio.nome}
+          id={restaurante.id}
+          preco={restaurante.cardapio.preco}
+          porcao={restaurante.cardapio.porcao}
         />
       ))}
     </List>
