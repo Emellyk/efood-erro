@@ -14,4 +14,8 @@ export const List = styled.ul`
   margin-bottom: 64px;
   padding-top: 80px;
   object-fit: cover;
+
+  li {
+    list-style: none;
+  }
 `

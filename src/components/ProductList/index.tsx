@@ -38,9 +38,9 @@ const ProductList = ({ restaurante }: Props) => {
               tipo={restaurante.tipo}
               foto={restaurante.cardapio.foto}
               nome={restaurante.cardapio.nome}
-              id={restaurante.id}
               preco={restaurante.cardapio.preco}
               porcao={restaurante.cardapio.porcao}
+              id={restaurante.id}
             />
           </li>
         ))}
