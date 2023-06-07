@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import {
   Card,
@@ -23,6 +23,8 @@ import { formataPreco } from '../ProductList'
 import Tag from '../Tag'
 import { BtnLinkSecundario } from '../Button/styles'
 import Button from '../Button'
+import { Restaurante } from '../../pages/Home'
+import { useParams } from 'react-router-dom'
 
 type Props = {
   id: number
@@ -80,25 +82,40 @@ const Product = ({ titulo, tipo, avaliacao, descricao, capa, id }: Props) => {
 
 export default Product
 
-export const ProductPerfil = ({
-  foto,
-  nome,
-  descricao,
-  porcao,
-  id,
-  preco
-}: Props) => {
+type PropsPerfil = {
+  restaurante: Restaurante
+  id: number
+  foto: string
+  nome: string
+  preco: number
+  porcao: string
+}
+
+export const ProductPerfil = ({ restaurante }: PropsPerfil) => {
+  const { id } = useParams()
+
+  useEffect(() => {
+    fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
+      .then((res) => res.json())
+      .then((res) => setRestaurante(res))
+  }, [id])
+
+  if (!restaurante) {
+    return <h3>Carregando...</h3>
+  }
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [modalEstaAberto, setModalEstaAberto] = useState(false)
 
   return (
     <>
       <CardPerfil className={modalEstaAberto ? 'visivel' : ''}>
-        <img src={foto} alt={nome} />
-        <TituloPerfil>{nome}</TituloPerfil>
-        <DescricaoPerfil>{descricao}</DescricaoPerfil>
+        <img src={restaurante.cardapio.foto} alt={restaurante.cardapio.nome} />
+        <TituloPerfil>{restaurante.cardapio.nome}</TituloPerfil>
+        <DescricaoPerfil>{restaurante.cardapio.descricao}</DescricaoPerfil>
         <BtnLinkSecundario
           type="link"
-          to={`/perfil/${id}`}
+          to={`/perfil/${restaurante.id}`}
           title="Adicione ao carrinho"
           onClick={() => setModalEstaAberto(true)}
         >
@@ -116,18 +133,22 @@ export const ProductPerfil = ({
           </Close>
           <div className="position">
             <ImgProduto>
-              <img src={foto} alt="Pizza Marguerita" />
+              <img src={restaurante.cardapio.foto} alt="Pizza Marguerita" />
             </ImgProduto>
             <div className="infos">
-              <TituloPerfil>{nome}</TituloPerfil>
-              <DescricaoPerfil>{descricao}</DescricaoPerfil>
-              <DescricaoPerfil>Serve: ${porcao}</DescricaoPerfil>
+              <TituloPerfil>{restaurante.cardapio.nome}</TituloPerfil>
+              <DescricaoPerfil>
+                {restaurante.cardapio.descricao}
+              </DescricaoPerfil>
+              <DescricaoPerfil>
+                Serve: ${restaurante.cardapio.porcao}
+              </DescricaoPerfil>
               <BtnLinkSecundario
                 type="link"
                 to={`/perfil/${id}`}
                 title="Adicione ao carrinho"
               >
-                Adicionar ao carrinho {formataPreco(preco)}
+                Adicionar ao carrinho {formataPreco(restaurante.cardapio.preco)}
               </BtnLinkSecundario>
             </div>
           </div>
